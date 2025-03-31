@@ -4,34 +4,47 @@ import java.util.Scanner;
 
 public class Ingressos {
 
+static Scanner scanner = new Scanner(System.in);
+
+    static int menuCliente(){
+        System.out.println("\n\n1. Cadastrar Pessoa");
+        System.out.println("2. Listar Pessoas");
+        System.out.println("3. Remover Pessoa");        
+        System.out.println("8. Comprar Ingressos");
+        System.out.println("0. Salvar e Sair"); 
+        System.out.print("Escolha uma opção: ");
+        int opCliente = scanner.nextInt();
+        scanner.nextLine(); // Limpar o buffer
+    return opCliente;
+    }
+    
+    static int menuEvento(){
+        System.out.println("4. Cadastrar Evento");
+        System.out.println("5. Atualizar Evento");
+        System.out.println("6. Lista Eventos");
+        System.out.println("7. Remover Evento");
+        System.out.println("0. Salvar e Sair"); 
+        System.out.print("Escolha uma opção: "); 
+        int opEvento = scanner.nextInt();
+        scanner.nextLine(); // Limpar o buffer
+    return opEvento;
+    }
+    
     public static void main(String[] args) {
         SistemaIngressos sistema = new SistemaIngressos();
-        Scanner scanner = new Scanner(System.in);
         String nomeArquivoPessoas = "pessoas.txt";
         String nomeArquivoEventos = "eventos.txt";
-
-
         // Carregar dados do arquivo
         sistema.carregarDadosPessoas(nomeArquivoPessoas);
         sistema.carregarDadosEventos(nomeArquivoEventos);
 
-
         while (true) {
-            System.out.println("\n\n1. Cadastrar Pessoa");
-            System.out.println("2. Listar Pessoas");
-            System.out.println("3. Remover Pessoa");
-            System.out.println("4. Cadastrar Evento");
-            System.out.println("5. Atualizar Evento");
-            System.out.println("6. Lista Eventos");
-            System.out.println("7. Remover Evento");
-            System.out.println("8. Comprar Ingressos");
-            System.out.println("9. Salvar e Sair");
-            System.out.print("Escolha uma opção: ");
-            int opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer
-
+            
             switch (opcao) {
                 case 1:
+                    System.out.print("CPF: ");
+                    int cpf = scanner.nextInt();
+                    scanner.nextLine(); // Limpar o buffer
                     System.out.print("Nome: ");
                     String nome = scanner.nextLine();
                     System.out.print("Idade: ");
@@ -39,7 +52,7 @@ public class Ingressos {
                     scanner.nextLine(); // Limpar o buffer
                     System.out.print("Sexo (M/F): ");
                     char sexo = scanner.nextLine().charAt(0);
-                    sistema.adicionarPessoa(new Pessoa(nome, idade, sexo, "."));
+                    sistema.adicionarPessoa(new Pessoa(cpf, nome, idade, sexo, "."));
                     break;
 
                 case 2:
@@ -48,9 +61,9 @@ public class Ingressos {
                     break;
 
                 case 3:
-                    System.out.print("Nome da Pessoa a remover: ");
-                    String nomeRemover = scanner.nextLine();
-                    sistema.removerPessoa(nomeRemover);
+                    System.out.print("Cpf da Pessoa a remover: ");
+                    int cpfRemover = scanner.nextInt();
+                    sistema.removerPessoa(cpfRemover);
                     break;
 
                 case 4:
@@ -98,7 +111,7 @@ public class Ingressos {
                     sistema.comprarIngresso(eventoComprar, quantidade);
                     break;
 
-                case 9:
+                case 0:
                     sistema.salvarDadosPessoas(nomeArquivoPessoas);
                     sistema.salvarDadosEventos(nomeArquivoEventos);
                     System.out.println("Saindo do sistema...");
