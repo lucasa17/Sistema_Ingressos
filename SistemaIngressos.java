@@ -15,8 +15,8 @@ public class SistemaIngressos {
         
     }
 
-    public void removerPessoa(String nome) {
-        listaPessoas.removeIf(p -> p.nome.equals(nome));
+    public void removerPessoa(int cpf) {
+        listaPessoas.removeIf(p -> p.cpf.equals(cpf));
     }
 
     public void atualizarEvento(String nome, Evento novoEvento) {
@@ -30,6 +30,7 @@ public class SistemaIngressos {
 
     public void listarPessoas() {
         for (Pessoa p : listaPessoas) {
+            System.out.println("Cpf: " + p.cpf);
             System.out.println("Nome: " + p.nome);
             System.out.println("Idade: " + p.idade);
             System.out.println("Sexo: " + p.sexo);
@@ -99,7 +100,7 @@ public class SistemaIngressos {
                 while ((linha = reader.readLine()) != null) {
                     String[] campos = linha.split(",");
                     if (campos.length == 4) {
-                        Pessoa novaPessoa = new Pessoa(campos[0], Integer.parseInt(campos[1]), campos[2].charAt(0), campos[3]);
+                        Pessoa novaPessoa = new Pessoa(Integer.parseInt(campos[0]), campos[1], Integer.parseInt(campos[2]), campos[3].charAt(0), campos[4]);
                         listaPessoas.add(novaPessoa);
                     }
                 }
